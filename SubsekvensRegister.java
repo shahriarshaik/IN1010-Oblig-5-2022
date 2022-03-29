@@ -6,7 +6,9 @@ import java.io.File;
 public class SubsekvensRegister {
     
     ArrayList<HashMap<String, Subsekvens>> SubsekvensRegister = new ArrayList<>();
+    private static ArrayList<String> tempSubsekvensHolder = new ArrayList<>();
     private static String filnavn = "Fil2.txt";
+    private static boolean finnes = false;
 
     public void settInnHash(HashMap<String, Subsekvens> hashMap) {
         SubsekvensRegister.add(hashMap);
@@ -41,14 +43,35 @@ public class SubsekvensRegister {
                     try {
                         print = print + fordeleBokstaver[i+1];
                         print = print + fordeleBokstaver[i+2];
-                        System.out.println(print);
+                        if(tempSubsekvensHolder.size() == 0){
+                            tempSubsekvensHolder.add(print);
+                        }
+                        else{
+                            try {
+                                for(String x : tempSubsekvensHolder){
+                                    if(x.equals(print)){
+                                        finnes = true; 
+                                    }
+                                }
+                                if(finnes){
+                                    finnes = false;
+                                }
+                                else if(!finnes){
+                                tempSubsekvensHolder.add(print);
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
                         print = "";
                         
                     } catch (Exception e) {
                         break;
                     }
                 }
+                System.out.println(tempSubsekvensHolder);
+                ord.close();
             }
+            lesefil.close();
         } catch (Exception e) {
             System.out.println("Fant ikke filen");
         }
