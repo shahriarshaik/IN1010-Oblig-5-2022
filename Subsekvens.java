@@ -3,7 +3,7 @@ public class Subsekvens {
     private int forekomster;
     
 
-    public Subsekvens(String subsekvens, int forekomster){
+    public Subsekvens(String subsekvens){
         this.subsekvens = subsekvens;
         this.forekomster = forekomster;
     }

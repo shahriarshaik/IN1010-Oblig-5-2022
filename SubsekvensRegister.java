@@ -5,12 +5,11 @@ import java.io.File;
 
 public class SubsekvensRegister {
     
-    ArrayList<HashMap<String, Subsekvens>> SubsekvensRegister = new ArrayList<>();
+    public static ArrayList<HashMap<String, Subsekvens>> SubsekvensRegister = new ArrayList<>();
     private static ArrayList<String> tempSubsekvensHolder = new ArrayList<>();
-    private static String filnavn = "Fil2.txt";
     private static boolean finnes = false;
 
-    public void settInnHash(HashMap<String, Subsekvens> hashMap) {
+    public static void settInnHash(HashMap<String, Subsekvens> hashMap) {
         SubsekvensRegister.add(hashMap);
     }
 
@@ -23,8 +22,8 @@ public class SubsekvensRegister {
         }
     }
 
-
-    public static void lesFil() {
+    public static void lesFil(String filnavn) {
+        HashMap<String, Subsekvens> tempHash = new HashMap<>();
         File filen = new File(filnavn);
         String holder;
         String ordholder;
@@ -40,10 +39,10 @@ public class SubsekvensRegister {
                     String print;
                     print = fordeleBokstaver[i];
                     
-                    try {
+                    try { 
                         print = print + fordeleBokstaver[i+1];
                         print = print + fordeleBokstaver[i+2];
-                        if(tempSubsekvensHolder.size() == 0){
+                        if(tempSubsekvensHolder.size() == 0){ //denne delen legger Subsekvensene til i en array
                             tempSubsekvensHolder.add(print);
                         }
                         else{
@@ -68,7 +67,13 @@ public class SubsekvensRegister {
                         break;
                     }
                 }
-                System.out.println(tempSubsekvensHolder);
+                for(String sub : tempSubsekvensHolder){
+                    tempHash.put(sub, new Subsekvens(sub));
+                }
+                tempSubsekvensHolder = null;
+                //System.out.println(tempSubsekvensHolder);
+                //System.out.println("\n" + tempHash.size() + "\n" + tempHash);
+                settInnHash(tempHash);
                 ord.close();
             }
             lesefil.close();
