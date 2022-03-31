@@ -42,6 +42,8 @@ public class SubsekvensRegister {
                     try { 
                         print = print + fordeleBokstaver[i+1];
                         print = print + fordeleBokstaver[i+2];
+                        tempHash.put(print, new Subsekvens(print));
+                        /*
                         if(tempSubsekvensHolder.size() == 0){ //denne delen legger Subsekvensene til i en array
                             tempSubsekvensHolder.add(print);
                         }
@@ -61,21 +63,28 @@ public class SubsekvensRegister {
                             } catch (Exception e) {
                             }
                         }
+                        */
                         print = "";
                         
                     } catch (Exception e) {
                         break;
                     }
                 }
+                //System.out.println(tempHash);
+
+                /*
                 for(String sub : tempSubsekvensHolder){
                     tempHash.put(sub, new Subsekvens(sub));
+                    //tempSubsekvensHolder.remove(sub);
                 }
-                tempSubsekvensHolder = null;
+                */
+
+                //tempSubsekvensHolder = null;
                 //System.out.println(tempSubsekvensHolder);
                 //System.out.println("\n" + tempHash.size() + "\n" + tempHash);
-                settInnHash(tempHash);
                 ord.close();
             }
+            settInnHash(tempHash);
             lesefil.close();
         } catch (Exception e) {
             System.out.println("Fant ikke filen");
