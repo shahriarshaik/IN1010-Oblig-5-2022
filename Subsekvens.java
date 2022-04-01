@@ -1,11 +1,10 @@
 public class Subsekvens {
     public final String subsekvens; 
-    private int forekomster;
+    public int forekomster = 1;
     
 
     public Subsekvens(String subsekvens){
         this.subsekvens = subsekvens;
-        this.forekomster = forekomster;
     }
 
     public String hentSubsekvens() {
