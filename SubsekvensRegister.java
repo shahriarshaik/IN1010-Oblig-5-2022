@@ -131,4 +131,33 @@ public class SubsekvensRegister {
         }
         return tempHash;
     }
+
+    public HashMap<String, Subsekvens> flettAlt() {
+        HashMap<String, Subsekvens> finalMap = null;
+        HashMap<String, Subsekvens> førsteMap;
+        try {
+            finalMap = flett(SubsekvensRegister.get(0), SubsekvensRegister.get(1));
+        } catch (Exception e) {
+            System.out.println("Enten første eller andre map eksisterer ikke!");
+        }
+        int arrstorrelse = SubsekvensRegister.size();
+
+        for(int i = 2; arrstorrelse<i; i++){
+            finalMap = flett(finalMap, SubsekvensRegister.get(i));
+        }
+
+        return finalMap;
+    }
+
+    @Override
+    public String toString() {
+        String print = ""; 
+        for(HashMap<String, Subsekvens> map : SubsekvensRegister){
+            for(Subsekvens sub : map.values()){
+                print = print + " " + sub;
+            }
+        }
+        return print;
+    }
+
 }
