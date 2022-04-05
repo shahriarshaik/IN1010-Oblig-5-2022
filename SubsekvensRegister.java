@@ -6,8 +6,6 @@ import java.io.File;
 public class SubsekvensRegister {
     
     public ArrayList<HashMap<String, Subsekvens>> SubsekvensRegister = new ArrayList<>();
-    private static ArrayList<String> tempSubsekvensHolder = new ArrayList<>();
-    private static boolean finnes = false;
 
     public void settInnHash(HashMap<String, Subsekvens> hashMap) {
         SubsekvensRegister.add(hashMap);
@@ -43,48 +41,15 @@ public class SubsekvensRegister {
                         print = print + fordeleBokstaver[i+1];
                         print = print + fordeleBokstaver[i+2];
                         tempHash.put(print, new Subsekvens(print));
-                        /*
-                        if(tempSubsekvensHolder.size() == 0){ //denne delen legger Subsekvensene til i en array
-                            tempSubsekvensHolder.add(print);
-                        }
-                        else{
-                            try {
-                                for(String x : tempSubsekvensHolder){
-                                    if(x.equals(print)){
-                                        finnes = true; 
-                                    }
-                                }
-                                if(finnes){
-                                    finnes = false;
-                                }
-                                else if(!finnes){
-                                tempSubsekvensHolder.add(print);
-                                }
-                            } catch (Exception e) {
-                            }
-                        }
-                        */
+
                         print = "";
                         
                     } catch (Exception e) {
                         break;
                     }
                 }
-                //System.out.println(tempHash);
-
-                /*
-                for(String sub : tempSubsekvensHolder){
-                    tempHash.put(sub, new Subsekvens(sub));
-                    //tempSubsekvensHolder.remove(sub);
-                }
-                */
-
-                //tempSubsekvensHolder = null;
-                //System.out.println(tempSubsekvensHolder);
-                //System.out.println("\n" + tempHash.size() + "\n" + tempHash);
                 ord.close();
             }
-            //settInnHash(tempHash);
             lesefil.close();
         } catch (Exception e) {
             System.out.println("Fant ikke filen");
@@ -134,7 +99,6 @@ public class SubsekvensRegister {
 
     public HashMap<String, Subsekvens> flettAlt() {
         HashMap<String, Subsekvens> finalMap = null;
-        HashMap<String, Subsekvens> førsteMap;
         try {
             finalMap = flett(SubsekvensRegister.get(0), SubsekvensRegister.get(1));
         } catch (Exception e) {
