@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Oblig5Del1",
+            "request": "launch",
+            "mainClass": "Oblig5Del1",
+            "projectName": "oblig 5 git_3f9e0bd4",
+            "args": "testdatalike"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -16,7 +24,7 @@
             "request": "launch",
             "mainClass": "Oblig5Del1",
             "projectName": "IN1010 git_c0d30c40",
-            "args": "testdatalitenlike"
+            "args": "testdatalike"
         },
         {
             "type": "java",

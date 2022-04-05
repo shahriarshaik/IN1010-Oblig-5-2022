@@ -142,11 +142,27 @@ public class SubsekvensRegister {
         }
         int arrstorrelse = SubsekvensRegister.size();
 
-        for(int i = 2; arrstorrelse<i; i++){
+        for(int i = 2; arrstorrelse>i; i++){
             finalMap = flett(finalMap, SubsekvensRegister.get(i));
         }
 
         return finalMap;
+    }
+
+    public String finnHøyestefremkomster(HashMap<String, Subsekvens> map) {
+        String print = "";
+        int forekmst = 0;
+        for(Subsekvens sub : map.values()){
+            if(sub.forekomster > forekmst){
+                forekmst = sub.forekomster;
+            }
+        }
+        for(Subsekvens sub : map.values()){
+            if(sub.forekomster == forekmst){
+                print = print + sub.subsekvens + " ";
+            }
+        }
+        return "Forekomster: " + forekmst + "\n" + "Subsekvenser: " + print;
     }
 
     @Override
