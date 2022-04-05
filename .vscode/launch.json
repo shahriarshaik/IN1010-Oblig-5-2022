@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch random",
+            "request": "launch",
+            "mainClass": "random",
+            "projectName": "IN1010 git_c0d30c40"
+        },
+        {
+            "type": "java",
             "name": "Launch Oblig5Del1",
             "request": "launch",
             "mainClass": "Oblig5Del1",

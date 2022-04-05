@@ -20,6 +20,11 @@ public class SubsekvensRegister {
         }
     }
 
+    public int antallMaps() {
+        int maps = SubsekvensRegister.size();
+        return maps;
+    }
+
     public static HashMap<String, Subsekvens> lesFil(String filnavn) {
         HashMap<String, Subsekvens> tempHash = new HashMap<>();
         File filen = new File(filnavn);
@@ -65,17 +70,6 @@ public class SubsekvensRegister {
         for(Subsekvens sub : map1.values()){
             tempHash.put(sub.subsekvens, sub);
         }
-        /* denne testen forteller at vi kan bruke stringen for å hente subsekvensen
-        System.out.println("Her håper vi å få Strings tilbake");
-        for(Subsekvens sub1 : tempHash.values()){
-            System.out.println(tempHash.get(sub1));
-        }
-
-        System.out.println("Her håper vi å få Subsekvenser tilbake");
-        for(Subsekvens sub1 : tempHash.values()){
-            System.out.println(tempHash.get(sub1.subsekvens));
-        }
-        */
         //denne skal drive å loope gjennom begge og adde til. 
         for(Subsekvens sub1 : map2.values()){ //dette er mappet som skal settes inn
             for (String sub : tempHash.keySet()){ //dette er mappet som vurderes
