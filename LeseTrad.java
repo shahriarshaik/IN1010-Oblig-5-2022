@@ -10,7 +10,9 @@ public class LeseTrad implements Runnable{
     }
     @Override
     public void run() {
-        monitor.settInnHash(monitor.lesFil(lokasjon));// implementer countdown
+        monitor.settInnHash(monitor.lesFil(lokasjon));// implementer countdown?
+        //System.out.println(monitor.subsekvensRegister);
+        System.out.println("kjørt");
     }
 
 }
