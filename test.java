@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.concurrent.*;
 
 public class test {
 
@@ -20,7 +21,7 @@ public class test {
         String filen = null;
         SubsekvensRegister register = new SubsekvensRegister();
         Scanner metadataLeser = null;
-
+        CountDownLatch minBariere = new CountDownLatch(6);
 
 
         try {
@@ -36,9 +37,13 @@ public class test {
             LeseTrad testtrad = new LeseTrad("testdatalike/"+forkast, monitor);
             Thread trad = new Thread(testtrad);
             trad.start();
+            minBariere.countDown();
         }
 
-        System.out.println(monitor.finnHøyestefremkomster(monitor.flettAlt()));
+        Thread idkThread = new Thread(System.out.println("noe"));
+
+        idkThread.join();
+        //System.out.println(monitor.finnHøyestefremkomster(monitor.flettAlt()));
 
 
 
