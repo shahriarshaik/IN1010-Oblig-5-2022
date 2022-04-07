@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.*;
 
@@ -22,6 +23,7 @@ public class test {
         SubsekvensRegister register = new SubsekvensRegister();
         Scanner metadataLeser = null;
         CountDownLatch minBariere = new CountDownLatch(6);
+        ArrayList<Thread> tradarr = new ArrayList<>();
 
 
         try {
@@ -30,20 +32,30 @@ public class test {
             System.out.println("Fant ikke filen!");
         }
 
+
         while(metadataLeser.hasNextLine()){ //denne finner ut antall tråder
             String forkast = metadataLeser.nextLine();
             nodvendigeTrader++;
 
             LeseTrad testtrad = new LeseTrad("testdatalike/"+forkast, monitor);
             Thread trad = new Thread(testtrad);
+            tradarr.add(trad);
             trad.start();
-            minBariere.countDown();
+            //minBariere.countDown();
         }
 
-        Thread idkThread = new Thread(System.out.println("noe"));
+        for(Thread i : tradarr){
+            try {
+                i.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
-        idkThread.join();
-        //System.out.println(monitor.finnHøyestefremkomster(monitor.flettAlt()));
+        //Thread idkThread = new Thread(System.out.println("noe"));
+
+        //idkThread.join();
+        System.out.println(monitor.finnHøyestefremkomster(monitor.flettAlt()));
 
 
 
