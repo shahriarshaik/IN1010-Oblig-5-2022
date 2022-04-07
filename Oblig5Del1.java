@@ -28,5 +28,6 @@ public class Oblig5Del1 {
         }
 
         System.out.println(register.finnHøyestefremkomster(register.flettAlt()));
+
     }
 }
