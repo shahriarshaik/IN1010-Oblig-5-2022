@@ -3,13 +3,15 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Oblig5Del2A {
+public class test {
     public static void main(String[] args) {
 
-        Monitor2 monitor = new Monitor2();
-        File metadataFil = new File(args[0] + "/metadata.csv");
+        //Monitor1 monitor1 = new Monitor1();
+        Monitor2 monitor2 = new Monitor2();
+        File metadataFil = new File("testdatalike" + "/metadata.csv");
         Scanner metadataLeser = null;
         ArrayList<Thread> tradarr = new ArrayList<>();
+        FletteTrad fletteTrad = new FletteTrad(monitor2);
 
         try {
             metadataLeser = new Scanner(metadataFil);
@@ -20,7 +22,7 @@ public class Oblig5Del2A {
         while(metadataLeser.hasNextLine()){ //denne finner ut antall tråder
 
             String forkast = metadataLeser.nextLine();
-            LeseTrad testtrad = new LeseTrad(args[0] + "/" + forkast, monitor);
+            LeseTrad testtrad = new LeseTrad("testdatalike" + "/" + forkast, monitor2);
             Thread trad = new Thread(testtrad);
             tradarr.add(trad);
             trad.start();
@@ -32,6 +34,25 @@ public class Oblig5Del2A {
                 e.printStackTrace();
             }
         }
-        System.out.println(monitor.finnHøyestefremkomster(monitor.flettAlt()));
+        
+        tradarr.clear();
+
+
+        for (int i = 0; i < 7; i++) {
+            Thread fletteTradThread = new Thread(fletteTrad);
+            tradarr.add(fletteTradThread);
+            fletteTradThread.start();
+        }
+
+        for(Thread i : tradarr){
+            try {
+                i.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println(monitor2.hentStørrelse());
+        
     }
 }

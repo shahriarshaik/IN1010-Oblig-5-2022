@@ -20,6 +20,21 @@ public class SubsekvensRegister {
         }
     }
 
+    public ArrayList<HashMap<String, Subsekvens>> hentToHash() {
+        ArrayList<HashMap<String, Subsekvens>> retur = new ArrayList<>();
+        HashMap<String, Subsekvens> en, to;
+
+        try {
+            en = SubsekvensRegister.get(0); to = SubsekvensRegister.get(1); 
+            SubsekvensRegister.remove(en); SubsekvensRegister.remove(to);
+            retur.add(en); retur.add(to);
+            return retur;
+        } catch (Exception e) {
+            System.out.println("hentToHash(): ikke nok maps");
+            return null;
+        }
+    }
+
     public int antallMaps() {
         int maps = SubsekvensRegister.size();
         return maps;
@@ -121,6 +136,11 @@ public class SubsekvensRegister {
             }
         }
         return "Forekomster: " + forekmst + "\n" + "Subsekvenser: " + print;
+    }
+
+    public int hentStørrelse() {
+        return SubsekvensRegister.size();
+        
     }
 
     @Override

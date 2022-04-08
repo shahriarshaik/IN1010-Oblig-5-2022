@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -8,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 //virker som at monitor virker hvis man bytter ut SubsekvensRegister med monitor1 i Oblig5del1 
 ////////////////////////////////////////
 
-public class Monitor1 {
+public class Monitor2 {
     SubsekvensRegister subsekvensRegister = new SubsekvensRegister();
     private  Lock lock= new ReentrantLock();
 
@@ -27,6 +28,16 @@ public class Monitor1 {
         lock.lock();
         try{
             return subsekvensRegister.hentHash();
+        }
+        finally{
+            lock.unlock();
+        }
+    }
+
+    public ArrayList<HashMap<String, Subsekvens>> hentToHash() {
+        lock.lock();
+        try{
+            return subsekvensRegister.hentToHash();
         }
         finally{
             lock.unlock();
