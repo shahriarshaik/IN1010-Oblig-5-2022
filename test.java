@@ -38,12 +38,30 @@ public class test {
         tradarr.clear();
 
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             Thread fletteTradThread = new Thread(fletteTrad);
             tradarr.add(fletteTradThread);
-            fletteTradThread.start();
+            //fletteTradThread.start();
         }
 
+        while(monitor2.hentStørrelse() != 1){
+            for (Thread thread : tradarr) {
+                try {
+                    thread.start();
+                } catch (Exception e) {
+                    //TODO: handle exception
+                }
+            }
+            for(Thread i : tradarr){
+                try {
+                    i.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        /*
         for(Thread i : tradarr){
             try {
                 i.join();
@@ -51,6 +69,7 @@ public class test {
                 e.printStackTrace();
             }
         }
+        */
 
         System.out.println(monitor2.hentStørrelse());
         
