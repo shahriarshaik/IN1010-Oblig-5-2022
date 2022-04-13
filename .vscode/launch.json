@@ -9,6 +9,13 @@
             "name": "Launch Oblig5Del2B",
             "request": "launch",
             "mainClass": "Oblig5Del2B",
+            "projectName": "oblig 5 git_3f9e0bd4"
+        },
+        {
+            "type": "java",
+            "name": "Launch Oblig5Del2B",
+            "request": "launch",
+            "mainClass": "Oblig5Del2B",
             "projectName": "IN1010 git_c0d30c40"
         },
         {

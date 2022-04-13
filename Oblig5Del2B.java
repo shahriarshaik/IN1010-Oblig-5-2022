@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
 public class Oblig5Del2B {
     public static void main(String[] args) {
 
-        String filen = "testdatalike";
+        String filen = args[0];
 
         Monitor2 monitor = new Monitor2();
         File metadataFil = new File(filen + "/metadata.csv");
