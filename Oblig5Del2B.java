@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 public class Oblig5Del2B {
     public static void main(String[] args) {
@@ -39,13 +40,13 @@ public class Oblig5Del2B {
 
         tradarr.clear();
 
-
+        CountDownLatch nedtelling = new CountDownLatch(monitor.hentStørrelse() - 1);
         for (int i = 0; i < 8; i++) {
-            FletteTrad fletteTrad = new FletteTrad(monitor);
+            FletteTrad fletteTrad = new FletteTrad(monitor, nedtelling);
             Thread traad = new Thread(fletteTrad);
             tradarr.add(traad);
             traad.start();
-            System.out.println("størrelse inni forloop: " + monitor.hentStørrelse());
+            //System.out.println("størrelse inni forloop: " + monitor.hentStørrelse());
         }
 
         for (Thread thread : tradarr) {
@@ -57,7 +58,7 @@ public class Oblig5Del2B {
         }
         tradarr.clear();
 
-        System.out.println(monitor.subsekvensRegister.SubsekvensRegister.size());
+        //System.out.println(monitor.subsekvensRegister.SubsekvensRegister.size());
 
         System.out.println(monitor.finnHøyestefremkomster(monitor.subsekvensRegister.SubsekvensRegister.get(0)));
         //System.out.println(monitor.finnHøyestefremkomster(monitor.flettAlt()));

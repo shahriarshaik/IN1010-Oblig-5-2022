@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -5,6 +6,8 @@ import java.util.Scanner;
 
 public class test {
     public static void main(String[] args) {
+
+        /*DEAKTIVERT HERFRA
 
         //Monitor1 monitor1 = new Monitor1();
         Monitor2 monitor2 = new Monitor2();
@@ -69,9 +72,10 @@ public class test {
                 e.printStackTrace();
             }
         }
-        */
+         
 
         System.out.println(monitor2.hentStørrelse());
-        
+        */ //TIL HIT
     }
 }
+

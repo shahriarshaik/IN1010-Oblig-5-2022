@@ -30,7 +30,7 @@ public class SubsekvensRegister {
             retur.add(en); retur.add(to);
             return retur;
         } catch (Exception e) {
-            System.out.println("hentToHash(): ikke nok maps");
+            //System.out.println("hentToHash(): ikke nok maps");
             return null;
         }
     }
