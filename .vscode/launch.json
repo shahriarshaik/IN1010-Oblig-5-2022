@@ -6,32 +6,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch Oblig5Del2B",
+            "name": "Launch Oblig5Hele",
             "request": "launch",
-            "mainClass": "Oblig5Del2B",
+            "mainClass": "Oblig5Hele",
             "projectName": "oblig 5 git_3f9e0bd4"
-        },
-        {
-            "type": "java",
-            "name": "Launch Oblig5Del2B",
-            "request": "launch",
-            "mainClass": "Oblig5Del2B",
-            "projectName": "IN1010 git_c0d30c40"
-        },
-        {
-            "type": "java",
-            "name": "Launch Oblig5Del2A",
-            "request": "launch",
-            "mainClass": "Oblig5Del2A.Oblig5Del2A",
-            "projectName": "IN1010 git_c0d30c40"
-        },
-        {
-            "type": "java",
-            "name": "Launch Oblig5Del2A",
-            "request": "launch",
-            "mainClass": "Oblig5Del2A",
-            "projectName": "IN1010 git_c0d30c40",
-            "args": "testdatalike"
         },
         {
             "type": "java",
@@ -39,21 +17,6 @@
             "request": "launch",
             "mainClass": "test",
             "projectName": "oblig 5 git_3f9e0bd4"
-        },
-        {
-            "type": "java",
-            "name": "Launch random",
-            "request": "launch",
-            "mainClass": "random",
-            "projectName": "IN1010 git_c0d30c40"
-        },
-        {
-            "type": "java",
-            "name": "Launch Oblig5Del1",
-            "request": "launch",
-            "mainClass": "Oblig5Del1",
-            "projectName": "oblig 5 git_3f9e0bd4",
-            "args": "testdatalike"
         },
         {
             "type": "java",
@@ -63,24 +26,9 @@
         },
         {
             "type": "java",
-            "name": "Launch Oblig5Del1",
-            "request": "launch",
-            "mainClass": "Oblig5Del1",
-            "projectName": "IN1010 git_c0d30c40",
-            "args": "testdatalike"
-        },
-        {
-            "type": "java",
             "name": "Launch test",
             "request": "launch",
             "mainClass": "test",
-            "projectName": "IN1010 git_c0d30c40"
-        },
-        {
-            "type": "java",
-            "name": "Launch testeord",
-            "request": "launch",
-            "mainClass": "testeord",
             "projectName": "IN1010 git_c0d30c40"
         }
     ]

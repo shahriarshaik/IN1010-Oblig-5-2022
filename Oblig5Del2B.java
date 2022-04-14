@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
 public class Oblig5Del2B {
     public static void main(String[] args) {
 
-        String filen = args[0];
+        String filen = "testdataliten";
 
         Monitor2 monitor = new Monitor2();
         File metadataFil = new File(filen + "/metadata.csv");
@@ -20,17 +20,17 @@ public class Oblig5Del2B {
             System.out.println("Fant ikke filen!");
         }
 
-        while(metadataLeser.hasNextLine()){ //denne finner ut antall tråder
+        while (metadataLeser.hasNextLine()) { // denne finner ut antall tråder
 
-            String forkast = metadataLeser.nextLine();
-            LeseTrad testtrad = new LeseTrad(filen + "/" + forkast, monitor);
+            String forkast = metadataLeser.nextLine(); // eksempel fil1.csv,false
+            String[] split = forkast.split(",");
+            LeseTrad testtrad = new LeseTrad(filen + "/" + split[0], monitor);
             Thread trad = new Thread(testtrad);
             tradarr.add(trad);
             trad.start();
         }
 
-
-        for(Thread i : tradarr){
+        for (Thread i : tradarr) {
             try {
                 i.join();
             } catch (InterruptedException e) {
@@ -46,7 +46,7 @@ public class Oblig5Del2B {
             Thread traad = new Thread(fletteTrad);
             tradarr.add(traad);
             traad.start();
-            //System.out.println("størrelse inni forloop: " + monitor.hentStørrelse());
+            // System.out.println("størrelse inni forloop: " + monitor.hentStørrelse());
         }
 
         for (Thread thread : tradarr) {
@@ -58,9 +58,9 @@ public class Oblig5Del2B {
         }
         tradarr.clear();
 
-        //System.out.println(monitor.subsekvensRegister.SubsekvensRegister.size());
+        // System.out.println(monitor.subsekvensRegister.SubsekvensRegister.size());
 
         System.out.println(monitor.finnHøyestefremkomster(monitor.subsekvensRegister.SubsekvensRegister.get(0)));
-        //System.out.println(monitor.finnHøyestefremkomster(monitor.flettAlt()));
+        // System.out.println(monitor.finnHøyestefremkomster(monitor.flettAlt()));
     }
 }

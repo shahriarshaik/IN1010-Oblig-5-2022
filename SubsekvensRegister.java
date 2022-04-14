@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.io.File;
 
 public class SubsekvensRegister {
-    
+
     public ArrayList<HashMap<String, Subsekvens>> SubsekvensRegister = new ArrayList<>();
 
     public void settInnHash(HashMap<String, Subsekvens> hashMap) {
@@ -12,7 +12,7 @@ public class SubsekvensRegister {
     }
 
     public HashMap<String, Subsekvens> hentHash() {
-        int index = 0; 
+        int index = 0;
         try {
             return SubsekvensRegister.get(index);
         } catch (Exception e) {
@@ -25,12 +25,15 @@ public class SubsekvensRegister {
         HashMap<String, Subsekvens> en, to;
 
         try {
-            en = SubsekvensRegister.get(0); to = SubsekvensRegister.get(1); 
-            SubsekvensRegister.remove(en); SubsekvensRegister.remove(to);
-            retur.add(en); retur.add(to);
+            en = SubsekvensRegister.get(0);
+            to = SubsekvensRegister.get(1);
+            SubsekvensRegister.remove(en);
+            SubsekvensRegister.remove(to);
+            retur.add(en);
+            retur.add(to);
             return retur;
         } catch (Exception e) {
-            //System.out.println("hentToHash(): ikke nok maps");
+            // System.out.println("hentToHash(): ikke nok maps");
             return null;
         }
     }
@@ -47,23 +50,23 @@ public class SubsekvensRegister {
         String ordholder;
         try {
             Scanner lesefil = new Scanner(filen);
-            while(lesefil.hasNext()){
-                holder = lesefil.nextLine();
+            while (lesefil.hasNext()) {
+                holder = lesefil.nextLine(); // eksempel: CASSRQGFLDEQYF
                 Scanner ord = new Scanner(holder);
                 ordholder = ord.next();
                 String[] fordeleBokstaver = ordholder.split("");
 
-                for(int i = 0; fordeleBokstaver.length > i; i++){
+                for (int i = 0; fordeleBokstaver.length > i; i++) {
                     String print;
                     print = fordeleBokstaver[i];
-                    
-                    try { 
-                        print = print + fordeleBokstaver[i+1];
-                        print = print + fordeleBokstaver[i+2];
+
+                    try {
+                        print = print + fordeleBokstaver[i + 1];
+                        print = print + fordeleBokstaver[i + 2];
                         tempHash.put(print, new Subsekvens(print));
 
                         print = "";
-                        
+
                     } catch (Exception e) {
                         break;
                     }
@@ -72,34 +75,37 @@ public class SubsekvensRegister {
             }
             lesefil.close();
         } catch (Exception e) {
-            System.out.println("Fant ikke filen");
+            System.out.println("Subsekvensregister.java, lesfil(): Fant ikke filen");
         }
         return tempHash;
     }
 
-    public static HashMap<String, Subsekvens> flett(HashMap<String, Subsekvens> map1, HashMap<String, Subsekvens> map2) {
+    public static HashMap<String, Subsekvens> flett(HashMap<String, Subsekvens> map1,
+            HashMap<String, Subsekvens> map2) {
         HashMap<String, Subsekvens> tempHash = new HashMap<>();
         boolean finnes = false;
 
-        //denne delen looper gjennom map1 og setter d i temp 
-        for(Subsekvens sub : map1.values()){
+        // denne delen looper gjennom map1 og setter d i temp
+        for (Subsekvens sub : map1.values()) {
             tempHash.put(sub.subsekvens, sub);
         }
-        //denne skal drive å loope gjennom begge og adde til. 
-        for(Subsekvens sub1 : map2.values()){ //dette er mappet som skal settes inn
-            for (String sub : tempHash.keySet()){ //dette er mappet som vurderes
-                if(sub.equals(sub1.subsekvens)){
-                    finnes=true;
+        // denne skal drive å loope gjennom begge og adde til.
+        for (Subsekvens sub1 : map2.values()) { // dette er mappet som skal settes inn
+            for (String sub : tempHash.keySet()) { // dette er mappet som vurderes
+                if (sub.equals(sub1.subsekvens)) {
+                    finnes = true;
                     break;
                 }
             }
-            if(finnes){
-                finnes=false; //setter finnes tilbake til false
-                //går inn i temp henter
-                // tror denne vil fakke opp grunnet at den ikke vil finne sub1 i hashmappet må finne ut hvordan jeg kan hente value
-                tempHash.get(sub1.subsekvens)/**denne delen henter en subsekvens */.forekomster = tempHash.get(sub1.subsekvens).forekomster + map2.get(sub1.subsekvens).forekomster;
-            }
-            else{
+            if (finnes) {
+                finnes = false; // setter finnes tilbake til false
+                // går inn i temp henter
+                // tror denne vil fakke opp grunnet at den ikke vil finne sub1 i hashmappet må
+                // finne ut hvordan jeg kan hente value
+                tempHash.get(sub1.subsekvens)/** denne delen henter en subsekvens */
+                        .forekomster = tempHash.get(sub1.subsekvens).forekomster
+                                + map2.get(sub1.subsekvens).forekomster;
+            } else {
                 tempHash.put(sub1.subsekvens, sub1);
             }
         }
@@ -115,7 +121,7 @@ public class SubsekvensRegister {
         }
         int arrstorrelse = SubsekvensRegister.size();
 
-        for(int i = 2; arrstorrelse>i; i++){
+        for (int i = 2; arrstorrelse > i; i++) {
             finalMap = flett(finalMap, SubsekvensRegister.get(i));
         }
 
@@ -125,13 +131,13 @@ public class SubsekvensRegister {
     public String finnHøyestefremkomster(HashMap<String, Subsekvens> map) {
         String print = "";
         int forekmst = 0;
-        for(Subsekvens sub : map.values()){
-            if(sub.forekomster > forekmst){
+        for (Subsekvens sub : map.values()) {
+            if (sub.forekomster > forekmst) {
                 forekmst = sub.forekomster;
             }
         }
-        for(Subsekvens sub : map.values()){
-            if(sub.forekomster == forekmst){
+        for (Subsekvens sub : map.values()) {
+            if (sub.forekomster == forekmst) {
                 print = print + sub.subsekvens + " ";
             }
         }
@@ -140,14 +146,14 @@ public class SubsekvensRegister {
 
     public int hentStørrelse() {
         return SubsekvensRegister.size();
-        
+
     }
 
     @Override
     public String toString() {
-        String print = ""; 
-        for(HashMap<String, Subsekvens> map : SubsekvensRegister){
-            for(Subsekvens sub : map.values()){
+        String print = "";
+        for (HashMap<String, Subsekvens> map : SubsekvensRegister) {
+            for (Subsekvens sub : map.values()) {
                 print = print + " " + sub;
             }
         }
