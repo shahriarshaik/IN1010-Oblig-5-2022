@@ -73,6 +73,7 @@ public class SubsekvensRegister {
                 }
                 ord.close();
             }
+            System.out.println("Lest ferdig: " + filnavn);
             lesefil.close();
         } catch (Exception e) {
             System.out.println("Subsekvensregister.java, lesfil(): Fant ikke filen");
@@ -109,6 +110,7 @@ public class SubsekvensRegister {
                 tempHash.put(sub1.subsekvens, sub1);
             }
         }
+        System.out.println("flettet ferdig 2 stykker . . . ");
         return tempHash;
     }
 

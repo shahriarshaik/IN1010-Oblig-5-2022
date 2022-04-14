@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -7,9 +6,10 @@ import java.util.concurrent.CountDownLatch;
 
 public class Oblig5Hele {
     public static void main(String[] args) {
+        final long startTime = System.nanoTime();
         Monitor2 sykdomT = new Monitor2();
         Monitor2 sykdomF = new Monitor2();
-        String lokasjon = "testdataliten";
+        String lokasjon = "data";
         File filen = new File(lokasjon + "/metadata.csv");
         Scanner metaLeser = null;
         ArrayList<String> falseArr = new ArrayList<>();
@@ -25,6 +25,7 @@ public class Oblig5Hele {
         while (metaLeser.hasNextLine()) {
             String holder = metaLeser.nextLine();
             String[] split = holder.split(","); // 0 = fil1.csv, 1 = True / False
+            System.out.println("leser fil: " + split[0] + " . . .");
             if (split[1].equals("True")) {
                 trueArr.add(split[0]);
                 LeseTrad testtrad = new LeseTrad(lokasjon + "/" + split[0], sykdomT);
@@ -50,8 +51,8 @@ public class Oblig5Hele {
             }
         }
         threads.clear();
-        System.out.println("Antall maps i sykdomT: " + sykdomT.antallMaps());
-        System.out.println("Antall maps i sykdomF: " + sykdomF.antallMaps());
+        //System.out.println("Antall maps i sykdomT: " + sykdomT.antallMaps());
+        //ystem.out.println("Antall maps i sykdomF: " + sykdomF.antallMaps());
 
         CountDownLatch nedtellingsykdomT = new CountDownLatch(sykdomT.hentStørrelse() - 1);
         CountDownLatch nedtellingsykdomF = new CountDownLatch(sykdomF.hentStørrelse() - 1);
@@ -77,10 +78,8 @@ public class Oblig5Hele {
             }
         }
         threads.clear();
-        System.out.println("\nsykdomT forekomst:"
-                + sykdomT.finnHøyestefremkomster(sykdomT.subsekvensRegister.SubsekvensRegister.get(0)));
-        System.out.println("\nsykdomF forekomst:"
-                + sykdomF.finnHøyestefremkomster(sykdomF.subsekvensRegister.SubsekvensRegister.get(0)));
+        //System.out.println("\nsykdomT forekomst:"+ sykdomT.finnHøyestefremkomster(sykdomT.subsekvensRegister.SubsekvensRegister.get(0)));
+        //System.out.println("\nsykdomF forekomst:"+ sykdomF.finnHøyestefremkomster(sykdomF.subsekvensRegister.SubsekvensRegister.get(0)));
         HashMap<String, Subsekvens> sykdomTmap = sykdomT.hentHash();
         HashMap<String, Subsekvens> sykdomFmap = sykdomF.hentHash();
 
@@ -116,17 +115,41 @@ public class Oblig5Hele {
 
         }
 
+        /*
         for (Subsekvens sub : tempSubHolder) {
             if (sub.forekomster > 0) {
                 System.out.println("mer enn 0 forekomst: " + sub);
             }
         }
+        */
 
-        System.out.println("\nAntall subT i sykdomTmap: " + sykdomTmap.size());
-        System.out.println("\nAntall subF i sykdomFmap: " + sykdomFmap.size());
-        System.out.println("\nAntall forskjellige sub i sykdomTmap + sykdomFmap: " + tempSubHolder.size());
+        //System.out.println("\nAntall subT i sykdomTmap: " + sykdomTmap.size());
+        //System.out.println("\nAntall subF i sykdomFmap: " + sykdomFmap.size());
+        //System.out.println("\nAntall forskjellige sub i sykdomTmap + sykdomFmap: " + tempSubHolder.size());
+        //System.out.println("\nAlle forskjellige Subsekvenser (subF + subT): \n" + tempSubHolder);
 
-        System.out.println("\nAlle forskjellige Subsekvenser (subF + subT): \n" + tempSubHolder);
+        for(Subsekvens subT : sykdomTmap.values()){
+            for(Subsekvens subFN : tempSubHolder){
+                if(subT.subsekvens.equals(subFN.subsekvens)){
+                    subT.forekomster = subT.forekomster - subFN.forekomster;
+                }
+            }
+        }
+
+        final long duration = System.nanoTime() - startTime;
+        System.out.println("Nanosekunder brukt: " + duration);
+        float durationSec = duration / 1000000000;
+        System.out.println("Sekunder brukt: " + durationSec);
+
+        for(Subsekvens subT : sykdomTmap.values()){
+            if(subT.forekomster > 6){
+                System.out.println(subT.subsekvens + " med " + subT.forekomster + " forekomster");
+            }
+        }
+
+
+        //System.out.println(sykdomF.finnHøyestefremkomster(sykdomTmap));
+
 
     }
 }

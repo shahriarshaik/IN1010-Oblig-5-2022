@@ -9,6 +9,13 @@
             "name": "Launch Oblig5Hele",
             "request": "launch",
             "mainClass": "Oblig5Hele",
+            "projectName": "IN1010 git_c0d30c40"
+        },
+        {
+            "type": "java",
+            "name": "Launch Oblig5Hele",
+            "request": "launch",
+            "mainClass": "Oblig5Hele",
             "projectName": "oblig 5 git_3f9e0bd4"
         },
         {
