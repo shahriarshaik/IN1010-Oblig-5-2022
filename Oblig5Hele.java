@@ -93,15 +93,22 @@ public class Oblig5Hele {
         ArrayList<Subsekvens> tempSubHolder = new ArrayList<>();
         // for loopene nede finner hvilken Subsekvenser en frisk person har som en
         for (Subsekvens subF : sykdomFmap.values()) {
+            Subsekvens SubHolder = null;
             for (Subsekvens subT : sykdomTmap.values()) {
                 if (subF.subsekvens.equals(subT.subsekvens)) {
-                    tempSubHolder.add(subF);
-                } else {
-                    Subsekvens nullforekomstSub = new Subsekvens(subT.subsekvens);
-                    nullforekomstSub.settnullForekomst();
-                    tempSubHolder.add(nullforekomstSub);
+                    finnes = true;
                 }
             }
+            if (finnes) {
+                finnes = false;
+                tempSubHolder.add(subF);
+            } else if (!finnes) {
+                finnes = false;
+                Subsekvens nullSub = new Subsekvens(subF.subsekvens);
+                nullSub.settnullForekomst();
+                tempSubHolder.add(nullSub);
+            }
+
         }
 
         for (Subsekvens sub : tempSubHolder) {
@@ -110,7 +117,11 @@ public class Oblig5Hele {
             }
         }
 
-        System.out.println("\nlike subsekvenser som friske har: \n" + tempSubHolder);
+        System.out.println("\nAntall subT i sykdomTmap: " + sykdomTmap.size());
+        System.out.println("\nAntall subF i sykdomFmap: " + sykdomFmap.size());
+        System.out.println("\nAntall forskjellige sub i sykdomTmap + sykdomFmap: " + tempSubHolder.size());
+
+        System.out.println("\nAlle forskjellige Subsekvenser (subF + subT): \n" + tempSubHolder);
 
     }
 }
