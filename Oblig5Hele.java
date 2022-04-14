@@ -92,19 +92,24 @@ public class Oblig5Hele {
         boolean finnes = false;
         ArrayList<Subsekvens> tempSubHolder = new ArrayList<>();
         // for loopene nede finner hvilken Subsekvenser en frisk person har som en
+
         for (Subsekvens subF : sykdomFmap.values()) {
+            tempSubHolder.add(subF);
+        }
+
+        for (Subsekvens subT : sykdomTmap.values()) {
             Subsekvens SubHolder = null;
-            for (Subsekvens subT : sykdomTmap.values()) {
+            for (Subsekvens subF : tempSubHolder) {
                 if (subF.subsekvens.equals(subT.subsekvens)) {
                     finnes = true;
                 }
             }
             if (finnes) {
                 finnes = false;
-                tempSubHolder.add(subF);
+                // tempSubHolder.add(subT);
             } else if (!finnes) {
                 finnes = false;
-                Subsekvens nullSub = new Subsekvens(subF.subsekvens);
+                Subsekvens nullSub = new Subsekvens(subT.subsekvens);
                 nullSub.settnullForekomst();
                 tempSubHolder.add(nullSub);
             }
